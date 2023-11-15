@@ -1,9 +1,9 @@
 CREATE SCHEMA ksiegowosc;
-DROP TABLE ksiegowosc.pracownicy
-DROP TABLE ksiegowosc.godziny
-DROP TABLE ksiegowosc.pensje
-DROP TABLE ksiegowosc.premie
-DROP TABLE ksiegowosc.wynagrodzenie
+--DROP TABLE ksiegowosc.pracownicy
+--DROP TABLE ksiegowosc.godziny
+--DROP TABLE ksiegowosc.pensje
+--DROP TABLE ksiegowosc.premie
+--DROP TABLE ksiegowosc.wynagrodzenie
 --------------------------------------------------
 CREATE TABLE ksiegowosc.pracownicy(
 id_pracownika INTEGER PRIMARY KEY,
@@ -135,9 +135,9 @@ SELECT nazwisko
 FROM ksiegowosc.pracownicy;
 
 --6b
-SELECT kw.id_pracownika
-,kpen.kwota
-,kprem.kwota
+SELECT kp.id_pracownika 
+,kpen.kwota as pensja
+,kprem.kwota as premia
 FROM ksiegowosc.pracownicy kp
 INNER JOIN ksiegowosc.wynagrodzenie kw 
 	ON kp.id_pracownika = kw.id_pracownika
@@ -235,8 +235,8 @@ ORDER BY kpen.kwota ASC;
 SELECT kp.id_pracownika
 ,imie
 ,nazwisko
-,kpen.kwota
-,kprem.kwota
+,kpen.kwota as pensja
+,kprem.kwota as premia
 FROM ksiegowosc.pracownicy kp
 INNER JOIN ksiegowosc.wynagrodzenie kw 
 	ON kp.id_pracownika = kw.id_pracownika
@@ -259,9 +259,9 @@ GROUP BY
 --6l
 SELECT 
     stanowisko,
-    AVG(CAST(kwota AS decimal(10, 2))) AS srednia_placa,
-    MIN(CAST(kwota AS decimal(10, 2))) AS minimalna_placa,
-    MAX(CAST(kwota AS decimal(10, 2))) AS maksymalna_placa
+    CAST(AVG(CAST(kwota AS decimal(10, 2))) AS money) AS srednia_placa,
+    CAST(MIN(CAST(kwota AS decimal(10, 2))) AS money) AS minimalna_placa,
+    CAST(MAX(CAST(kwota AS decimal(10, 2))) AS money) AS maksymalna_placa
 FROM ksiegowosc.pensje
 WHERE stanowisko = 'Pracownik Finansowy'
 GROUP BY stanowisko;
