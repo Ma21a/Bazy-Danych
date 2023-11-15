@@ -183,8 +183,8 @@ SELECT kp.imie
 FROM ksiegowosc.pracownicy kp
 INNER JOIN ksiegowosc.godziny kg 
 	ON kp.id_pracownika = kg.id_pracownika
-GROUP BY kp.id_pracownika, DATE_PART('month', kg.data);
-ORDER BY DATE_PART('month', kg.data) ASC
+GROUP BY kp.id_pracownika, DATE_PART('month', kg.data)
+ORDER BY DATE_PART('month', kg.data) ASC;
 
 --6g
 SELECT kp.id_pracownika
