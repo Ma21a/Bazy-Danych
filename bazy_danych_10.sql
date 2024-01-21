@@ -50,7 +50,7 @@ VALUES (
         'R', 
         'H', 
         'U', 
-        (SELECT TOP 1 ProductSubcategoryID FROM Production.ProductSubcategory), -- przyk³ad uzyskania istniej¹cego ID
+        (SELECT TOP 1 ProductSubcategoryID FROM Production.ProductSubcategory), 
         (SELECT TOP 1 ProductModelID FROM Production.ProductModel), 
         GETDATE(), 
         NULL, 
@@ -129,7 +129,7 @@ VALUES (
         'R', 
         'H', 
         'U', 
-        (SELECT TOP 1 ProductSubcategoryID FROM Production.ProductSubcategory), -- przyk³ad uzyskania istniej¹cego ID
+        (SELECT TOP 1 ProductSubcategoryID FROM Production.ProductSubcategory), 
         (SELECT TOP 1 ProductModelID FROM Production.ProductModel), 
         GETDATE(), 
         NULL, 
