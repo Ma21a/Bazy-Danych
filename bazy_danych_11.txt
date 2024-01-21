@@ -1,0 +1,18 @@
+Zad.1
+Gdy istnieje klucz główny:
+Zapytanie może efektywnie korzystać z indeksu na kolumnach SalesOrderID i SalesOrderDetailID, co skutkuje szybkim zlokalizowaniem konkretnego rekordu. Wykonanie jest optymalne, koszty operacji wejścia/wyjścia i jednostek centralnej przetwarzania są minimalne, a ilość wczytanych wierszy jest znikoma.
+
+W przypadku braku klucza głównego:
+Proces wyszukiwania obejmuje znacznie większą liczbę wierszy, co skutkuje kosztem na poziomie 100%. Dosłownie przeszukiwana jest cała tabela, co generuje znacznie wyższe koszty operacji.
+
+Zmiana słowa "AND" na "OR":
+Zamiana na operator "OR" może prowadzić do konieczności przeszukania znacznie większej liczby rekordów, ponieważ oba warunki nie muszą być jednocześnie spełnione. W zależności od struktury indeksów lub ich braku, taka modyfikacja może wymagać przeskanowania całej tabeli, co z kolei skutkuje wyższymi kosztami operacji.
+
+Zad.2
+CREATE INDEX IX_Product_Name ON Production.Product (Name);
+
+SELECT ProductID, Name
+FROM Production.Product
+WHERE Name = 'Bearing Ball';
+
+Dodanie indeksu (IX_Product_Name) wpływa korzystnie na plan wykonania zapytania, przyspieszając proces wyszukiwania rekordów. Indeksy są kluczowe dla optymalizacji operacji wyszukiwania w bazie danych.
