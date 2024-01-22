@@ -36,7 +36,7 @@ id_godziny INTEGER NOT NULL,
 id_pensji INTEGER NOT NULL,
 id_premii INTEGER NOT NULL
 );
--------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------
 ALTER TABLE ksiegowosc.wynagrodzenie
 ADD FOREIGN KEY (id_pracownika)
 REFERENCES ksiegowosc.pracownicy(id_pracownika);
@@ -139,3 +139,24 @@ SELECT * FROM ksiegowosc.pracownicy;
 SELECT upper(nazwisko)
 FROM ksiegowosc.pracownicy
 WHERE length(nazwisko) = (SELECT MAX(length(nazwisko)) FROM ksiegowosc.pracownicy)
+
+--d 
+SELECT 
+    p.id_pracownika, 
+    p.imie, 
+    p.nazwisko, 
+    MD5(CONCAT(p.imie, p.nazwisko, pe.kwota)) AS zakodowana_pensja
+FROM ksiegowosc.pracownicy p
+JOIN ksiegowosc.wynagrodzenie w ON p.id_pracownika = w.id_pracownika
+JOIN ksiegowosc.pensje pe ON w.id_pensji = pe.id_pensji
+
+SELECT
+    p.id_pracownika, 
+    p.imie, 
+    p.nazwisko, 
+    pe.kwota AS pensja, 
+    pr.kwota AS premia
+FROM ksiegowosc.pracownicy p
+LEFT JOIN ksiegowosc.wynagrodzenie w ON p.id_pracownika = w.id_pracownika
+LEFT JOIN ksiegowosc.pensje pe ON w.id_pensji = pe.id_pensji
+LEFT JOIN ksiegowosc.premie pr ON w.id_premii = pr.id_premii
